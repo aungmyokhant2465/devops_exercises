@@ -1,0 +1,12 @@
+// Run this command in one terminal.
+
+docker run -it --name fetch ubuntu sh -c "while true; do echo 'Input website:'; read website; echo 'Searching..'; sleep 1; curl http://$website; done"
+
+// To install curl open other terminal and run
+
+docker exec -it fetch bash
+
+apt-get update
+apt-get -y install curl
+
+// Then enter the website url in the first opened terminal.
