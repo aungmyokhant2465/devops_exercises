@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  redis-server:
+    image: redis
+  backend:
+    image: part2/example-backend
+    build: ../../material-applications/example-backend
+    environment:
+      - REDIS_HOST=redis-server
+    ports:
+      - 8080:8080
+  frontend:
+    image: part2/example-frontend
+    build: ../../material-applications/example-frontend
+    ports:
+      - 5000:5000
