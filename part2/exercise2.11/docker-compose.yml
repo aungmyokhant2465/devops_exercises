@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  dev_frontend:
+    image: example/dev-frontend
+    build:
+      context: ../../material-applications/example-frontend
+      dockerfile: Dockerfile.dev
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ../../material-applications/example-frontend:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    container_name: example-dev-frontend
+
+volumes:
+  node_modules:
