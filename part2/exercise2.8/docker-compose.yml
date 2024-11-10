@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  redis-server:
+    image: redis
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    container_name: db_example
+    volumes:
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
+  backend:
+    image: part2/example-backend
+    build: ../../material-applications/example-backend
+    environment:
+      - REDIS_HOST=redis-server
+      - POSTGRES_HOST=db
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  frontend:
+    image: part2/example-frontend
+    build: ../../material-applications/example-frontend
+    ports:
+      - 5000:5000
+  web:
+    image: nginx
+    ports:
+      - 8081:80
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
