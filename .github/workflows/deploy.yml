@@ -31,3 +31,4 @@ jobs:
         with:
           push: true
           tags: aungmk/express-app:latest
+          context: ./express-app
