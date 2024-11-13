@@ -29,5 +29,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: express-app
           push: true
-          tags: user/app:latest
+          tags: docker-hy/express-app:latest
