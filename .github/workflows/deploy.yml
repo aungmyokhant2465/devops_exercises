@@ -31,4 +31,4 @@ jobs:
         with:
           push: true
           tags: aungmk/express-app:latest
-          file: "material-applications/express-app"
+          file: "material-applications/express-app/Dockerfile"
