@@ -1,0 +1,15 @@
+FROM node:16
+
+EXPOSE 5000
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+# create the appuser
+RUN useradd -m appuser && chown -R appuser . && npm install -g serve && npm install && npm run build && rm -rf node_modules src public
+
+# now we can change the user
+USER appuser
+
+CMD [ "serve", "-s", "-l", "5000", "build" ]
